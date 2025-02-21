@@ -1,10 +1,9 @@
 package com.co.multimedia.manager.crosscutting.domain.translators;
 
-import com.co.multimedia.manager.crosscutting.domain.dto.MenuDto;
 import com.co.multimedia.manager.crosscutting.domain.dto.MenuSiteDto;
 import com.co.multimedia.manager.crosscutting.domain.entity.MenuEntity;
 import com.co.multimedia.manager.crosscutting.domain.entity.MenuSiteEntity;
-import com.co.multimedia.manager.crosscutting.domain.entity.SiteConfigurationEntity;
+import com.co.multimedia.manager.crosscutting.domain.entity.DomainEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class MenuSiteTranslator {
         return menusSiteDto;
     }
 
-    public static MenuSiteEntity toMenuSiteEntity(MenuEntity menu, SiteConfigurationEntity site) {
+    public static MenuSiteEntity toMenuSiteEntity(MenuEntity menu, DomainEntity site) {
         return MenuSiteEntity.builder()
                 .menu(menu)
                 .siteConfiguration(site)

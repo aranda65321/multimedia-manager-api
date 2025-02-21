@@ -5,7 +5,7 @@ import com.co.multimedia.manager.crosscutting.domain.entity.MenuSiteEntity;
 import java.util.List;
 import java.util.UUID;
 
-public interface MenuSiteDataProvider {
+public interface MenuDomainProvider {
     public MenuSiteEntity save(MenuSiteEntity menu);
 
     public MenuSiteEntity findById(UUID id);

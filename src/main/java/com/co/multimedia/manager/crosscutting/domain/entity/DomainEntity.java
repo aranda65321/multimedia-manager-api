@@ -15,7 +15,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(schema = "GLOBAL_CONFIGURATION", name = "site_configuration")
-public class SiteConfigurationEntity {
+public class DomainEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
     private UUID id;

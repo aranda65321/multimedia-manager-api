@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SiteConfigurationDto {
+public class DomainDto {
     private UUID id;
     private String name;
     private String description;

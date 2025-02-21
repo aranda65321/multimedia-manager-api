@@ -5,8 +5,8 @@ import com.co.multimedia.manager.crosscutting.domain.dto.MenuSiteDto;
 import com.co.multimedia.manager.crosscutting.domain.enums.TypeError;
 import com.co.multimedia.manager.crosscutting.domain.translators.ApiResponseTranslator;
 import com.co.multimedia.manager.crosscutting.exception.ApiProcessException;
-import com.co.multimedia.manager.module.menuxsite.service.MenuSiteService;
-import com.co.multimedia.manager.module.menuxsite.usecase.MenuSiteUseCase;
+import com.co.multimedia.manager.module.menuxsite.service.MenuDomainService;
+import com.co.multimedia.manager.module.menuxsite.usecase.MenuDomainUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,15 +16,15 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class MenuSiteServiceImpl implements MenuSiteService {
+public class MenuDomainServiceImpl implements MenuDomainService {
 
     @Autowired
-    private MenuSiteUseCase menuSiteUseCase;
+    private MenuDomainUseCase menuDomainUseCase;
 
     @Override
     public ResponseEntity<ApiResponseDto> findById(UUID id) throws ApiProcessException {
         try {
-            MenuSiteDto result = this.menuSiteUseCase.findById(id);
+            MenuSiteDto result = this.menuDomainUseCase.findById(id);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_009);
@@ -34,7 +34,7 @@ public class MenuSiteServiceImpl implements MenuSiteService {
     @Override
     public ResponseEntity<ApiResponseDto> findAll() throws ApiProcessException {
         try {
-            List<MenuSiteDto> result = this.menuSiteUseCase.finAll();
+            List<MenuSiteDto> result = this.menuDomainUseCase.finAll();
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_010);
@@ -44,7 +44,7 @@ public class MenuSiteServiceImpl implements MenuSiteService {
     @Override
     public ResponseEntity<ApiResponseDto> save(UUID idMenu, UUID idSite) throws ApiProcessException {
         try {
-            MenuSiteDto result = this.menuSiteUseCase.save(idMenu, idSite);
+            MenuSiteDto result = this.menuDomainUseCase.save(idMenu, idSite);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_011);
@@ -54,7 +54,7 @@ public class MenuSiteServiceImpl implements MenuSiteService {
     @Override
     public ResponseEntity<ApiResponseDto> deleteById(UUID id) throws ApiProcessException {
         try {
-            this.menuSiteUseCase.deleteById(id);
+            this.menuDomainUseCase.deleteById(id);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, null));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_012);
@@ -64,7 +64,7 @@ public class MenuSiteServiceImpl implements MenuSiteService {
     @Override
     public ResponseEntity<ApiResponseDto> findBySiteConfigurationEntityId(UUID id) throws ApiProcessException {
         try {
-            List<MenuSiteDto> result = this.menuSiteUseCase.findBySiteConfigurationEntityId(id);
+            List<MenuSiteDto> result = this.menuDomainUseCase.findBySiteConfigurationEntityId(id);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_010);

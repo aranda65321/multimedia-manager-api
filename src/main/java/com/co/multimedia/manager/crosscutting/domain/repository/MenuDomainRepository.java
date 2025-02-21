@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface MenuSiteRepository extends JpaRepository<MenuSiteEntity, UUID> {
+public interface MenuDomainRepository extends JpaRepository<MenuSiteEntity, UUID> {
 
     List<MenuSiteEntity> findBySiteConfigurationId(UUID id);
 

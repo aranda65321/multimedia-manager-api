@@ -1,12 +1,12 @@
-package com.co.multimedia.manager.module.siteConfiguration.service.impl;
+package com.co.multimedia.manager.module.domain.service.impl;
 
 import com.co.multimedia.manager.crosscutting.domain.dto.ApiResponseDto;
-import com.co.multimedia.manager.crosscutting.domain.dto.SiteConfigurationDto;
+import com.co.multimedia.manager.crosscutting.domain.dto.DomainDto;
 import com.co.multimedia.manager.crosscutting.domain.enums.TypeError;
 import com.co.multimedia.manager.crosscutting.domain.translators.ApiResponseTranslator;
 import com.co.multimedia.manager.crosscutting.exception.ApiProcessException;
-import com.co.multimedia.manager.module.siteConfiguration.service.SiteConfigurationService;
-import com.co.multimedia.manager.module.siteConfiguration.usecase.SiteConfigurationUseCase;
+import com.co.multimedia.manager.module.domain.service.DomainService;
+import com.co.multimedia.manager.module.domain.usecase.DomainUseCase;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,14 +19,14 @@ import java.util.UUID;
 
 @Service
 @Log4j2
-public class SiteConfigurationServiceImpl implements SiteConfigurationService {
+public class DomainServiceImpl implements DomainService {
     @Autowired
-    private SiteConfigurationUseCase siteConfigurationUseCase;
+    private DomainUseCase domainUseCase;
 
     @Override
-    public ResponseEntity<ApiResponseDto> findSiteById(UUID id) throws ApiProcessException {
+    public ResponseEntity<ApiResponseDto> findById(UUID id) throws ApiProcessException {
         try {
-            SiteConfigurationDto result = siteConfigurationUseCase.findSiteById(id);
+            DomainDto result = domainUseCase.findById(id);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_001);
@@ -34,9 +34,9 @@ public class SiteConfigurationServiceImpl implements SiteConfigurationService {
     }
 
     @Override
-    public ResponseEntity<ApiResponseDto> findAllSite() throws ApiProcessException {
+    public ResponseEntity<ApiResponseDto> findAll() throws ApiProcessException {
         try {
-            List<SiteConfigurationDto> result = this.siteConfigurationUseCase.findAllSite();
+            List<DomainDto> result = this.domainUseCase.findAll();
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_002);
@@ -44,10 +44,10 @@ public class SiteConfigurationServiceImpl implements SiteConfigurationService {
     }
 
     @Override
-    public ResponseEntity<ApiResponseDto> save(SiteConfigurationDto siteConfigurationDto) throws ApiProcessException {
+    public ResponseEntity<ApiResponseDto> save(DomainDto domainDto) throws ApiProcessException {
         try {
-            siteConfigurationDto.setCreationDate(LocalDateTime.now());
-            SiteConfigurationDto result = this.siteConfigurationUseCase.save(siteConfigurationDto);
+            domainDto.setCreationDate(LocalDateTime.now());
+            DomainDto result = this.domainUseCase.save(domainDto);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_003);
@@ -55,9 +55,9 @@ public class SiteConfigurationServiceImpl implements SiteConfigurationService {
     }
 
     @Override
-    public ResponseEntity<ApiResponseDto> deleteSiteById(UUID id) throws ApiProcessException {
+    public ResponseEntity<ApiResponseDto> deleteById(UUID id) throws ApiProcessException {
         try {
-            this.siteConfigurationUseCase.deleteSiteById(id);
+            this.domainUseCase.deleteById(id);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, null));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_004);
