@@ -2,6 +2,7 @@ package com.co.multimedia.manager.module.menuxsite.usecase.impl;
 
 import com.co.multimedia.manager.crosscutting.domain.dto.MenuSiteDto;
 import com.co.multimedia.manager.crosscutting.domain.entity.MenuEntity;
+import com.co.multimedia.manager.crosscutting.domain.entity.MenuSiteEntity;
 import com.co.multimedia.manager.crosscutting.domain.entity.SiteConfigurationEntity;
 import com.co.multimedia.manager.crosscutting.domain.translators.MenuSiteTranslator;
 import com.co.multimedia.manager.crosscutting.exception.ApiProcessException;
@@ -51,5 +52,11 @@ public class MenuSiteUseCaseImpl implements MenuSiteUseCase {
     public void deleteById(UUID id) {
         log.info("Realizando borrado de Menusite con id {}", id);
         this.menuSiteDataProvider.deleteById(id);
+    }
+
+    @Override
+    public List<MenuSiteDto> findBySiteConfigurationEntityId(UUID id) {
+        log.info("Realizando busqueda Menu x Site por siteId {}", id);
+        return MenuSiteTranslator.toListMenuSiteDto(this.menuSiteDataProvider.findBySiteConfigurationEntityId(id));
     }
 }

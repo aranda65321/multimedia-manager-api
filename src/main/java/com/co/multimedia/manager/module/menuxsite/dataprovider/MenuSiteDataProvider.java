@@ -13,4 +13,6 @@ public interface MenuSiteDataProvider {
     public List<MenuSiteEntity> finAll();
 
     public void deleteById(UUID id);
+
+    List<MenuSiteEntity> findBySiteConfigurationEntityId(UUID id);
 }

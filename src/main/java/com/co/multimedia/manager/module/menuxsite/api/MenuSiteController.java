@@ -17,7 +17,6 @@ public class MenuSiteController {
     @Autowired
     private MenuSiteService menuSiteService;
 
-
     @GetMapping
     public ResponseEntity<ApiResponseDto> findMenuById(@RequestParam UUID id) throws ApiProcessException {
         return this.menuSiteService.findById(id);
@@ -36,5 +35,10 @@ public class MenuSiteController {
     @DeleteMapping
     public ResponseEntity<ApiResponseDto> deleteMenu(@RequestParam UUID id) throws ApiProcessException {
         return this.menuSiteService.deleteById(id);
+    }
+
+    @GetMapping("/findBySiteId")
+    public ResponseEntity<ApiResponseDto> findBySiteId(@RequestParam UUID id) throws ApiProcessException {
+        return this.menuSiteService.findBySiteConfigurationEntityId(id);
     }
 }

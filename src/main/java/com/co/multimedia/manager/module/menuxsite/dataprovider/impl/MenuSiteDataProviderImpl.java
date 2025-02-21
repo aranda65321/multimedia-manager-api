@@ -34,4 +34,9 @@ public class MenuSiteDataProviderImpl implements MenuSiteDataProvider {
     public void deleteById(UUID id) {
         this.menuSiteRepository.deleteById(id);
     }
+
+    @Override
+    public List<MenuSiteEntity> findBySiteConfigurationEntityId(UUID id) {
+        return this.menuSiteRepository.findBySiteConfigurationId(id);
+    }
 }

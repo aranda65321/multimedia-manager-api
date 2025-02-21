@@ -60,4 +60,14 @@ public class MenuSiteServiceImpl implements MenuSiteService {
             throw new ApiProcessException(ex, TypeError.IR_012);
         }
     }
+
+    @Override
+    public ResponseEntity<ApiResponseDto> findBySiteConfigurationEntityId(UUID id) throws ApiProcessException {
+        try {
+            List<MenuSiteDto> result = this.menuSiteUseCase.findBySiteConfigurationEntityId(id);
+            return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
+        } catch (Exception ex) {
+            throw new ApiProcessException(ex, TypeError.IR_010);
+        }
+    }
 }
