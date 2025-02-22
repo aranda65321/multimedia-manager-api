@@ -36,7 +36,7 @@ public class MenuDomainDataProviderImpl implements MenuDomainProvider {
     }
 
     @Override
-    public List<MenuSiteEntity> findBySiteConfigurationEntityId(UUID id) {
-        return this.menuDomainRepository.findBySiteConfigurationId(id);
+    public List<MenuSiteEntity> findByDomainId(UUID id) {
+        return this.menuDomainRepository.findByDomainId(id);
     }
 }

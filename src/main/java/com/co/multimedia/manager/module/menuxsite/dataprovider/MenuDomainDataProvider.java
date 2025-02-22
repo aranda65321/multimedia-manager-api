@@ -14,5 +14,5 @@ public interface MenuDomainProvider {
 
     public void deleteById(UUID id);
 
-    List<MenuSiteEntity> findBySiteConfigurationEntityId(UUID id);
+    List<MenuSiteEntity> findByDomainId(UUID id);
 }

@@ -11,26 +11,22 @@ import java.util.List;
 public class MenuSiteTranslator {
 
 
-    public static List<MenuSiteDto> toListMenuSiteDto(List<MenuSiteEntity> menuSite) {
+    public static List<MenuSiteDto> toListMenuDomainDto(List<MenuSiteEntity> menuSite) {
         List<MenuSiteDto> menusSiteDto = new ArrayList<>();
-        menuSite.forEach(menu -> menusSiteDto.add(toMenuSiteDto(menu)));
+        menuSite.forEach(menu -> menusSiteDto.add(toMenuDomainDto(menu)));
         return menusSiteDto;
     }
 
-    public static MenuSiteEntity toMenuSiteEntity(MenuEntity menu, DomainEntity site) {
+    public static MenuSiteEntity toMenuDomainEntity(MenuEntity menu, DomainEntity site) {
         return MenuSiteEntity.builder()
                 .menu(menu)
-                .siteConfiguration(site)
+                .domain(site)
                 .build();
     }
 
-    public static MenuSiteDto toMenuSiteDto(MenuSiteEntity menuSite) {
+    public static MenuSiteDto toMenuDomainDto(MenuSiteEntity menuSite) {
         return MenuSiteDto.builder()
-                .id(menuSite.getId())
-                .siteId(menuSite.getSiteConfiguration().getId())
-                .nameSite(menuSite.getSiteConfiguration().getName())
-                .menuId(menuSite.getMenu().getId())
-                .nameMenu(menuSite.getMenu().getName())
+                .menu(MenuTranslator.toMenuDto(menuSite.getMenu()))
                 .build();
     }
 }
