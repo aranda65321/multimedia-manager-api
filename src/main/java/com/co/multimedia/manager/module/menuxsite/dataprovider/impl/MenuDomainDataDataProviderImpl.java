@@ -2,7 +2,7 @@ package com.co.multimedia.manager.module.menuxsite.dataprovider.impl;
 
 import com.co.multimedia.manager.crosscutting.domain.entity.MenuSiteEntity;
 import com.co.multimedia.manager.crosscutting.domain.repository.MenuDomainRepository;
-import com.co.multimedia.manager.module.menuxsite.dataprovider.MenuDomainProvider;
+import com.co.multimedia.manager.module.menuxsite.dataprovider.MenuDomainDataProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class MenuDomainDataProviderImpl implements MenuDomainProvider {
+public class MenuDomainDataDataProviderImpl implements MenuDomainDataProvider {
 
     @Autowired
     private MenuDomainRepository menuDomainRepository;

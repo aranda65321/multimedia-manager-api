@@ -23,7 +23,7 @@ public class MenuServiceImpl implements MenuService {
     private MenuUseCase menuUseCase;
 
     @Override
-    public ResponseEntity<ApiResponseDto> findSiteById(UUID id) throws ApiProcessException {
+    public ResponseEntity<ApiResponseDto> findMenuById(UUID id) throws ApiProcessException {
         try {
             MenuDto result = this.menuUseCase.findMenuById(id);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
@@ -33,9 +33,9 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public ResponseEntity<ApiResponseDto> findAllSite() throws ApiProcessException {
+    public ResponseEntity<ApiResponseDto> findAllMenus() throws ApiProcessException {
         try {
-            List<MenuDto> result = this.menuUseCase.finAllMenus();
+            List<MenuDto> result = this.menuUseCase.findAllMenus();
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_006);
@@ -54,7 +54,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public ResponseEntity<ApiResponseDto> deleteSiteById(UUID id) throws ApiProcessException {
+    public ResponseEntity<ApiResponseDto> deleteMenuById(UUID id) throws ApiProcessException {
         try {
             this.menuUseCase.deleteMenuById(id);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, null));

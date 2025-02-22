@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/menusite")
+@RequestMapping("/menudomain")
 @CrossOrigin("*")
 public class MenuDomainController {
 
@@ -37,8 +37,8 @@ public class MenuDomainController {
         return this.menuDomainService.deleteById(id);
     }
 
-    @GetMapping("/findBySiteId")
-    public ResponseEntity<ApiResponseDto> findBySiteId(@RequestParam UUID id) throws ApiProcessException {
-        return this.menuDomainService.findBySiteConfigurationEntityId(id);
+    @GetMapping("/findByDomainId")
+    public ResponseEntity<ApiResponseDto> findByDomainId(@RequestParam UUID id) throws ApiProcessException {
+        return this.menuDomainService.findByDomainConfigurationEntityId(id);
     }
 }

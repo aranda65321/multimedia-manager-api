@@ -1,5 +1,6 @@
 package com.co.multimedia.manager.module.menuxsite.usecase;
 
+import com.co.multimedia.manager.crosscutting.domain.dto.MenuDto;
 import com.co.multimedia.manager.crosscutting.domain.dto.MenuSiteDto;
 import com.co.multimedia.manager.crosscutting.exception.ApiProcessException;
 
@@ -16,5 +17,5 @@ public interface MenuDomainUseCase {
 
     public void deleteById(UUID id);
 
-    public List<MenuSiteDto> findBySiteConfigurationEntityId(UUID id);
+    public List<MenuDto> findByDomainId(UUID id);
 }

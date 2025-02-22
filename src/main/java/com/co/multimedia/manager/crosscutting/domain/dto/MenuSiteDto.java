@@ -15,9 +15,8 @@ import java.util.UUID;
 @Builder
 public class MenuSiteDto {
     private UUID id;
-    private UUID siteId;
-    private String nameSite;
-    private UUID menuId;
-    private String nameMenu;
+    private UUID idDomain;
+    private MenuDto menu;
+    private DomainDto domain;
 
 }

@@ -1,7 +1,7 @@
 package com.co.multimedia.manager.module.domain.usecase.impl;
 
 import com.co.multimedia.manager.crosscutting.domain.dto.DomainDto;
-import com.co.multimedia.manager.crosscutting.domain.translators.SiteTranslator;
+import com.co.multimedia.manager.crosscutting.domain.translators.DomainTranslator;
 import com.co.multimedia.manager.crosscutting.exception.ApiProcessException;
 import com.co.multimedia.manager.module.domain.dataprovider.DomainDataProvider;
 import com.co.multimedia.manager.module.domain.usecase.DomainUseCase;
@@ -22,21 +22,21 @@ public class DomainUseCaseImpl implements DomainUseCase {
     @Override
     public DomainDto findById(UUID id) throws ApiProcessException {
         log.info("Realizando busqueda de Site con id {}", id);
-        return SiteTranslator.toSiteDto(this.domainDataProvider.findById(id));
+        return DomainTranslator.toDomainDto(this.domainDataProvider.findById(id));
     }
 
     @Override
     public List<DomainDto> findAll() throws ApiProcessException {
         log.info("Realizando busqueda de todos los sites ");
-        return SiteTranslator.toSitesDto(this.domainDataProvider.findAll());
+        return DomainTranslator.toDomainsDto(this.domainDataProvider.findAll());
     }
 
     @Override
     public DomainDto save(DomainDto domainDto) throws ApiProcessException {
         log.info("Realizando persistencia de site con name: {}", domainDto.getName());
         domainDto.setCreationDate(LocalDateTime.now());
-        return SiteTranslator.toSiteDto(this.domainDataProvider.save(SiteTranslator
-                .toSiteEntity(domainDto)));
+        return DomainTranslator.toDomainDto(this.domainDataProvider.save(DomainTranslator
+                .toDomainEntity(domainDto)));
     }
 
     @Override

@@ -6,15 +6,15 @@ import com.co.multimedia.manager.crosscutting.domain.entity.DomainEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SiteTranslator {
+public class DomainTranslator {
 
-    public static List<DomainDto> toSitesDto(List<DomainEntity> siteConfigurationEntities) {
+    public static List<DomainDto> toDomainsDto(List<DomainEntity> siteConfigurationEntities) {
         List<DomainDto> sitesDto = new ArrayList<>();
-        siteConfigurationEntities.forEach(site -> sitesDto.add(toSiteDto(site)));
+        siteConfigurationEntities.forEach(site -> sitesDto.add(toDomainDto(site)));
         return sitesDto;
     }
 
-    public static DomainEntity toSiteEntity(DomainDto domainDto) {
+    public static DomainEntity toDomainEntity(DomainDto domainDto) {
         return DomainEntity.builder()
                 .name(domainDto.getName())
                 .creationDate(domainDto.getCreationDate())
@@ -25,7 +25,7 @@ public class SiteTranslator {
                 .build();
     }
 
-    public static DomainDto toSiteDto(DomainEntity domainEntity) {
+    public static DomainDto toDomainDto(DomainEntity domainEntity) {
         return DomainDto.builder()
                 .name(domainEntity.getName())
                 .id(domainEntity.getId())

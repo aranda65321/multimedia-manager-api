@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface MenuDomainRepository extends JpaRepository<MenuSiteEntity, UUID> {
 
-    List<MenuSiteEntity> findBySiteConfigurationId(UUID id);
+    List<MenuSiteEntity> findByDomainId(UUID id);
 
 }

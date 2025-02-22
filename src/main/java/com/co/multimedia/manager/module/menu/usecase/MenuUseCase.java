@@ -11,7 +11,7 @@ public interface MenuUseCase {
 
     public MenuDto findMenuById(UUID id);
 
-    public List<MenuDto> finAllMenus();
+    public List<MenuDto> findAllMenus();
 
     public void deleteMenuById(UUID id);
 

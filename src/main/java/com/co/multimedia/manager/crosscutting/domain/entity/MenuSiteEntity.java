@@ -23,7 +23,7 @@ public class MenuSiteEntity {
     @ManyToOne
     @JoinColumn(name = "fk_site_configuration", referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_site_configuration"))
-    private DomainEntity siteConfiguration;
+    private DomainEntity domain;
 
     @ManyToOne
     @JoinColumn(name = "fk_menu", referencedColumnName = "id",

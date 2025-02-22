@@ -15,6 +15,6 @@ public interface MenuDomainService {
 
     public ResponseEntity<ApiResponseDto> deleteById(UUID id) throws ApiProcessException;
 
-    public ResponseEntity<ApiResponseDto> findBySiteConfigurationEntityId(UUID id) throws ApiProcessException;
+    public ResponseEntity<ApiResponseDto> findByDomainConfigurationEntityId(UUID id) throws ApiProcessException;
 
 }

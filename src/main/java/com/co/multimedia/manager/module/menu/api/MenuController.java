@@ -20,12 +20,12 @@ public class MenuController {
 
     @GetMapping
     public ResponseEntity<ApiResponseDto> findMenuById(@RequestParam UUID id) throws ApiProcessException {
-        return this.menuService.findSiteById(id);
+        return this.menuService.findMenuById(id);
     }
 
     @GetMapping("findAll")
     public ResponseEntity<ApiResponseDto> findAllMenus() throws ApiProcessException {
-        return this.menuService.findAllSite();
+        return this.menuService.findAllMenus();
     }
 
     @PostMapping
@@ -35,7 +35,7 @@ public class MenuController {
 
     @DeleteMapping
     public ResponseEntity<ApiResponseDto> deleteMenu(@RequestParam UUID id) throws ApiProcessException {
-        return this.menuService.deleteSiteById(id);
+        return this.menuService.deleteMenuById(id);
     }
 
 

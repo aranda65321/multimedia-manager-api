@@ -1,6 +1,7 @@
 package com.co.multimedia.manager.module.menuxsite.service.impl;
 
 import com.co.multimedia.manager.crosscutting.domain.dto.ApiResponseDto;
+import com.co.multimedia.manager.crosscutting.domain.dto.MenuDto;
 import com.co.multimedia.manager.crosscutting.domain.dto.MenuSiteDto;
 import com.co.multimedia.manager.crosscutting.domain.enums.TypeError;
 import com.co.multimedia.manager.crosscutting.domain.translators.ApiResponseTranslator;
@@ -62,9 +63,9 @@ public class MenuDomainServiceImpl implements MenuDomainService {
     }
 
     @Override
-    public ResponseEntity<ApiResponseDto> findBySiteConfigurationEntityId(UUID id) throws ApiProcessException {
+    public ResponseEntity<ApiResponseDto> findByDomainConfigurationEntityId(UUID id) throws ApiProcessException {
         try {
-            List<MenuSiteDto> result = this.menuDomainUseCase.findBySiteConfigurationEntityId(id);
+            List<MenuDto> result = this.menuDomainUseCase.findByDomainId(id);
             return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_010);
