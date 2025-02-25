@@ -46,8 +46,18 @@ public class MenuServiceImpl implements MenuService {
     public ResponseEntity<ApiResponseDto> save(MenuDto menuDto) throws ApiProcessException {
         try {
             menuDto.setCreationDate(LocalDateTime.now());
-            MenuDto result = this.menuUseCase.saveMenu(menuDto);
-            return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
+            return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(
+                    HttpStatus.OK, this.menuUseCase.saveMenu(menuDto)));
+        } catch (Exception ex) {
+            throw new ApiProcessException(ex, TypeError.IR_007);
+        }
+    }
+
+    @Override
+    public ResponseEntity<ApiResponseDto> saveChild(MenuDto menuDto) throws ApiProcessException {
+        try {
+            return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(
+                    HttpStatus.OK, this.menuUseCase.saveMenuChild(menuDto)));
         } catch (Exception ex) {
             throw new ApiProcessException(ex, TypeError.IR_007);
         }

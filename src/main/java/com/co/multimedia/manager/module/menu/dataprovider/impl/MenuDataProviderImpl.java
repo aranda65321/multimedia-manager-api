@@ -26,8 +26,13 @@ public class MenuDataProviderImpl implements MenuDataProvider {
     }
 
     @Override
-    public List<MenuEntity> finAllMenus() {
+    public List<MenuEntity> findAllMenus() {
         return this.menuRepository.findAll();
+    }
+
+    @Override
+    public List<MenuEntity> findAllMenusByIdParent(UUID id) {
+        return this.menuRepository.findByParentMenuId(id);
     }
 
     @Override

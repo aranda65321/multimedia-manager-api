@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Log4j2
 public class ApiControllerExceptionHandler {
 
-    @ExceptionHandler(value = {ApiProcessException.class})
+    @ExceptionHandler(ApiProcessException.class)
     public ResponseEntity<ApiResponseDto> exceptionHandler(ApiProcessException ex) {
         log.info("ERROR::. {}", ex.getTypeError().getDescription());
         return new ResponseEntity<>(ApiResponseTranslator.toApiResponseDtoWithError(ex.getTypeError()),

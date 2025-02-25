@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -24,4 +25,6 @@ public class MenuDto {
     private LocalDateTime modificationDate;
     private String langCode;
     private String iconClass;
+    private MenuDto parent;
+    private List<MenuDto> children;
 }

@@ -23,7 +23,7 @@ public class MenuController {
         return this.menuService.findMenuById(id);
     }
 
-    @GetMapping("findAll")
+    @GetMapping("/findAll")
     public ResponseEntity<ApiResponseDto> findAllMenus() throws ApiProcessException {
         return this.menuService.findAllMenus();
     }
@@ -31,6 +31,11 @@ public class MenuController {
     @PostMapping
     public ResponseEntity<ApiResponseDto> createMenu(@RequestBody MenuDto menuDto) throws ApiProcessException {
         return this.menuService.save(menuDto);
+    }
+
+    @PostMapping("/child")
+    public ResponseEntity<ApiResponseDto> createMenuChild(@RequestBody MenuDto menuDto) throws ApiProcessException {
+        return this.menuService.saveChild(menuDto);
     }
 
     @DeleteMapping

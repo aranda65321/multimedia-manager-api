@@ -15,6 +15,8 @@ public interface MenuService {
 
     public ResponseEntity<ApiResponseDto> save(MenuDto menuDto) throws ApiProcessException;
 
+    public ResponseEntity<ApiResponseDto> saveChild(MenuDto menuDto) throws ApiProcessException;
+
     public ResponseEntity<ApiResponseDto> deleteMenuById(UUID id) throws ApiProcessException;
 
 

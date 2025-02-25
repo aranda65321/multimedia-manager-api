@@ -9,6 +9,8 @@ import java.util.UUID;
 public interface MenuUseCase {
     public MenuDto saveMenu(MenuDto menu) throws ApiProcessException;
 
+    public MenuDto saveMenuChild(MenuDto menu) throws ApiProcessException;
+
     public MenuDto findMenuById(UUID id);
 
     public List<MenuDto> findAllMenus();

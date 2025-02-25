@@ -24,15 +24,24 @@ public class MenuTranslator {
         return menusDto;
     }
 
-    public static MenuDto toMenuDto(MenuEntity menuDtoEntity) {
-        return MenuDto.builder()
-                .id(menuDtoEntity.getId())
-                .name(menuDtoEntity.getName())
-                .creationDate(menuDtoEntity.getCreationDate())
-                .modificationDate(menuDtoEntity.getModificationDate())
-                .description(menuDtoEntity.getDescription())
-                .iconClass(menuDtoEntity.getIconClass())
-                .langCode(menuDtoEntity.getLangCode())
+    public static MenuDto toMenuDto(MenuEntity menuEntity) {
+        return toMenuDto(menuEntity, new ArrayList<>());
+    }
+
+    public static MenuDto toMenuDto(MenuEntity menuEntity, List<MenuEntity> children) {
+        MenuDto menu = MenuDto.builder()
+                .id(menuEntity.getId())
+                .name(menuEntity.getName())
+                .creationDate(menuEntity.getCreationDate())
+                .modificationDate(menuEntity.getModificationDate())
+                .description(menuEntity.getDescription())
+                .iconClass(menuEntity.getIconClass())
+                .langCode(menuEntity.getLangCode())
                 .build();
+        if (menuEntity.getParentMenu() != null) {
+            menu.setParent(toMenuDto(menuEntity.getParentMenu()));
+        }
+        menu.setChildren(toListMenuDto(children));
+        return menu;
     }
 }
