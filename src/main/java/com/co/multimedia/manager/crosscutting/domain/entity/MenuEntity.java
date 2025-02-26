@@ -1,12 +1,10 @@
 package com.co.multimedia.manager.crosscutting.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -14,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Entity
+@ToString
 @Table(schema = "GLOBAL_CONFIGURATION", name = "menu")
 public class MenuEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,8 +31,10 @@ public class MenuEntity {
     @Column(name = "icon_class")
     private String iconClass;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_menu_parent", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_menu_parent"))
-    private MenuEntity parentMenu;
+    @Column(name = "fk_menu_parent")
+    private UUID parentId;
+
+    @Transient
+    private List<MenuEntity> children;
 
 }

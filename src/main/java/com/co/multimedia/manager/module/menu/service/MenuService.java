@@ -19,5 +19,7 @@ public interface MenuService {
 
     public ResponseEntity<ApiResponseDto> deleteMenuById(UUID id) throws ApiProcessException;
 
+    public ResponseEntity<ApiResponseDto> findAllMenusWithChild() throws ApiProcessException;
+
 
 }

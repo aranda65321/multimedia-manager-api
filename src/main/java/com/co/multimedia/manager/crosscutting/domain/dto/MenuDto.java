@@ -25,6 +25,6 @@ public class MenuDto {
     private LocalDateTime modificationDate;
     private String langCode;
     private String iconClass;
-    private MenuDto parent;
+    private UUID parent;
     private List<MenuDto> children;
 }

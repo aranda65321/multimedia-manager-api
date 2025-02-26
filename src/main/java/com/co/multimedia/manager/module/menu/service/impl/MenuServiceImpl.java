@@ -73,5 +73,15 @@ public class MenuServiceImpl implements MenuService {
         }
     }
 
+    @Override
+    public ResponseEntity<ApiResponseDto> findAllMenusWithChild() throws ApiProcessException {
+        try {
+            List<MenuDto> result = this.menuUseCase.findAllMenusWithChild();
+            return ResponseEntity.ok(ApiResponseTranslator.toApiResponseDto(HttpStatus.OK, result));
+        } catch (Exception ex) {
+            throw new ApiProcessException(ex, TypeError.IR_006);
+        }
+    }
+
 
 }

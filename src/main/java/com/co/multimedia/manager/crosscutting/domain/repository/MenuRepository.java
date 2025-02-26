@@ -9,5 +9,7 @@ import java.util.UUID;
 
 @Repository
 public interface MenuRepository extends JpaRepository<MenuEntity, UUID> {
-    public List<MenuEntity> findByParentMenuId(UUID id);
+    public List<MenuEntity> findByParentId(UUID id);
+
+    List<MenuEntity> findAll();
 }

@@ -4,7 +4,9 @@ import com.co.multimedia.manager.crosscutting.domain.dto.MenuDto;
 import com.co.multimedia.manager.crosscutting.domain.dto.MenuSiteDto;
 import com.co.multimedia.manager.crosscutting.domain.entity.MenuEntity;
 import com.co.multimedia.manager.crosscutting.domain.entity.DomainEntity;
+import com.co.multimedia.manager.crosscutting.domain.entity.MenuSiteEntity;
 import com.co.multimedia.manager.crosscutting.domain.translators.MenuDomainTranslator;
+import com.co.multimedia.manager.crosscutting.domain.translators.MenuTranslator;
 import com.co.multimedia.manager.crosscutting.exception.ApiProcessException;
 import com.co.multimedia.manager.module.menu.dataprovider.MenuDataProvider;
 import com.co.multimedia.manager.module.menuxsite.dataprovider.MenuDomainDataProvider;
@@ -14,6 +16,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,6 +42,8 @@ public class MenuDomainUseCaseImpl implements MenuDomainUseCase {
     @Override
     public MenuSiteDto findById(UUID id) {
         log.info("Realizando busqueda de Menusite con id {}", id);
+        MenuSiteEntity menu = this.menuDomainDataProvider.findById(id);
+
         return MenuDomainTranslator.toMenuDomainDto(this.menuDomainDataProvider.findById(id));
     }
 
@@ -57,6 +62,11 @@ public class MenuDomainUseCaseImpl implements MenuDomainUseCase {
     @Override
     public List<MenuDto> findByDomainId(UUID id) {
         log.info("Realizando busqueda Menu x Site por siteId {}", id);
-        return MenuDomainTranslator.toListMenuDto(this.menuDomainDataProvider.findByDomainId(id));
+        List<MenuSiteEntity> menusSite = this.menuDomainDataProvider.findByDomainId(id);
+        List<MenuEntity> menus = new ArrayList<>();
+        for (MenuSiteEntity menuSite : menusSite) {
+            menus.add(menuDataProvider.findMenuById(menuSite.getMenu().getId()));
+        }
+        return MenuTranslator.toListMenuDto(MenuTranslator.cleanRepeatMenus(menus));
     }
 }

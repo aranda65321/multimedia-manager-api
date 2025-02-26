@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuTranslator {
-    public static MenuEntity toMenuEntity(MenuDto menuDto) {
+    public static MenuEntity toMenuEntity(final MenuDto menuDto) {
         return MenuEntity.builder()
                 .name(menuDto.getName())
                 .creationDate(LocalDateTime.now())
@@ -18,17 +18,14 @@ public class MenuTranslator {
                 .build();
     }
 
-    public static List<MenuDto> toListMenuDto(List<MenuEntity> menus) {
+    public static List<MenuDto> toListMenuDto(final List<MenuEntity> menus) {
         List<MenuDto> menusDto = new ArrayList<>();
         menus.forEach(menu -> menusDto.add(toMenuDto(menu)));
         return menusDto;
     }
 
-    public static MenuDto toMenuDto(MenuEntity menuEntity) {
-        return toMenuDto(menuEntity, new ArrayList<>());
-    }
 
-    public static MenuDto toMenuDto(MenuEntity menuEntity, List<MenuEntity> children) {
+    public static MenuDto toMenuDto(final MenuEntity menuEntity) {
         MenuDto menu = MenuDto.builder()
                 .id(menuEntity.getId())
                 .name(menuEntity.getName())
@@ -37,11 +34,40 @@ public class MenuTranslator {
                 .description(menuEntity.getDescription())
                 .iconClass(menuEntity.getIconClass())
                 .langCode(menuEntity.getLangCode())
+                .parent(menuEntity.getParentId())
+                .children(new ArrayList<>())
                 .build();
-        if (menuEntity.getParentMenu() != null) {
-            menu.setParent(toMenuDto(menuEntity.getParentMenu()));
+        if (menuEntity.getChildren() != null && menuEntity.getChildren().size() > 0) {
+            for (MenuEntity menuChild : menuEntity.getChildren()) {
+                menu.getChildren().add(toMenuDto(menuChild));
+            }
         }
-        menu.setChildren(toListMenuDto(children));
         return menu;
+    }
+
+    public static List<MenuEntity> cleanRepeatMenus(List<MenuEntity> menus) {
+        List<MenuEntity> auxMenus = new ArrayList<>();
+        for (int i = 0; i < menus.size(); i++) {
+            for (int j = 0; j < menus.size(); j++) {
+                if (!menus.get(j).getChildren().isEmpty()
+                        && existIntoChild(menus.get(j).getChildren(), menus.get(i))) {
+                    auxMenus.add(menus.get(i));
+                }
+            }
+        }
+        menus.removeAll(auxMenus);
+        return menus;
+    }
+
+    private static boolean existIntoChild(List<MenuEntity> children, MenuEntity menu) {
+        for (MenuEntity child : children) {
+            if (menu.getId().equals(child.getId())) {
+                return true;
+            }
+            if (!child.getChildren().isEmpty()) {
+                existIntoChild(child.getChildren(), menu);
+            }
+        }
+        return false;
     }
 }

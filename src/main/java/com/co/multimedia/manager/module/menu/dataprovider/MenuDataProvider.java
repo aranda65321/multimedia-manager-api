@@ -16,4 +16,6 @@ public interface MenuDataProvider {
     public List<MenuEntity> findAllMenusByIdParent(UUID id);
 
     public void deleteMenuById(UUID id);
+
+    public List<MenuEntity> findAllMenusWithChildren();
 }

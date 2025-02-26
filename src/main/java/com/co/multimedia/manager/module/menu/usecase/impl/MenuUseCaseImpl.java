@@ -11,8 +11,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,10 +32,10 @@ public class MenuUseCaseImpl implements MenuUseCase {
     @Override
     public MenuDto saveMenuChild(MenuDto menu) throws ApiProcessException {
         log.info("Realizando persistencia de Menu hijo con name: {}", menu.getName());
-        MenuEntity parent = this.menuDataProvider.findMenuById(menu.getParent().getId());
+        MenuEntity parent = this.menuDataProvider.findMenuById(menu.getParent());
         if (parent != null) {
             MenuEntity save = MenuTranslator.toMenuEntity(menu);
-            save.setParentMenu(parent);
+            save.setParentId(parent.getId());
             return MenuTranslator.toMenuDto(this.menuDataProvider.saveMenu(save));
         }
         return null;
@@ -51,13 +49,8 @@ public class MenuUseCaseImpl implements MenuUseCase {
 
     @Override
     public List<MenuDto> findAllMenus() {
-        log.info("Realizando busqueda de todos los Menus con hijos");
-        List<MenuDto> menusDto = MenuTranslator.toListMenuDto(this.menuDataProvider.findAllMenus());
-        for (MenuDto menu : menusDto) {
-            addChildrenToMenu(menu, menusDto);
-        }
-        cleanRepeatMenus(menusDto);
-        return menusDto;
+        log.info("Realizando busqueda de todos los Menus");
+        return MenuTranslator.toListMenuDto(this.menuDataProvider.findAllMenus());
     }
 
     @Override
@@ -66,39 +59,10 @@ public class MenuUseCaseImpl implements MenuUseCase {
         this.menuDataProvider.deleteMenuById(id);
     }
 
-    private List<MenuDto> addChildrenToMenu(MenuDto parent, List<MenuDto> menus) {
-        for (MenuDto menuChild : menus) {
-            if (menuChild.getParent() != null
-                    && menuChild.getParent().getId().equals(parent.getId())) {
-                parent.getChildren().add(menuChild);
-            }
-        }
-        return menus;
-    }
-
-    private void cleanRepeatMenus(List<MenuDto> menusDto) {
-        List<MenuDto> auxMenus = new ArrayList<>();
-        for (int i = 0; i < menusDto.size(); i++) {
-            for (int j = 0; j < menusDto.size(); j++) {
-                if (!menusDto.get(j).getChildren().isEmpty()
-                        && existIntoChild(menusDto.get(j).getChildren(), menusDto.get(i))) {
-                    auxMenus.add(menusDto.get(i));
-                }
-            }
-        }
-        menusDto.removeAll(auxMenus);
-    }
-
-    private boolean existIntoChild(List<MenuDto> children, MenuDto menu) {
-        for (MenuDto child : children) {
-            if (menu.getId().equals(child.getId())) {
-                return true;
-            }
-            if (!child.getChildren().isEmpty()) {
-                existIntoChild(child.getChildren(), menu);
-            }
-        }
-        return false;
+    @Override
+    public List<MenuDto> findAllMenusWithChild() {
+        log.info("Realizando busqueda de todos los Menus con hijos");
+        return MenuTranslator.toListMenuDto(this.menuDataProvider.findAllMenusWithChildren());
     }
 
 
